@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokémon Type App</title>
+
+        <!-- PWA manifest -->
+        <link rel="manifest" href="manifest.json" />
+
+        <link rel="stylesheet" href="style.css" />
+
+        <!-- Theme color for mobile browsers -->
+        <meta name="theme-color" content="#FF0000" />
+    </head>
+    <body>
+        <header>Pokémon Type App</header>
+
+        <main>
+            <div class="dropdown">
+                <div class="input-wrapper" id="typeInputWrapper">
+                    <span class="input-icon" id="selectedIcon">⚪</span>
+                <input type="text" id="typeInput" placeholder="Enter Pokémon type" />
+                </div>
+                <ul id="dropdownList">
+                    <li class="type-normal" data-value="normal">
+                        <span class="icon">⚪</span>
+                        <div class="text"><span class="label">Normal</span></div>
+                    </li>
+                    <li class="type-fire" data-value="fire">
+                        <span class="icon">🔥</span>
+                        <div class="text"><span class="label">Fire</span></div>
+                    </li>
+                    <li class="type-water" data-value="water">
+                        <span class="icon">💧</span>
+                        <div class="text"><span class="label">Water</span></div>
+                    </li>
+                    <li class="type-electric" data-value="electric">
+                        <span class="icon">⚡</span>
+                        <div class="text"><span class="label">Electric</span></div>
+                    </li>
+                    <li class="type-grass" data-value="grass">
+                        <span class="icon">🌿</span>
+                        <div class="text"><span class="label">Grass</span></div>
+                    </li>
+                    <li class="type-ice" data-value="ice">
+                        <span class="icon">❄️</span>
+                        <div class="text"><span class="label">Ice</span></div>
+                    </li>
+                    <li class="type-fighting" data-value="fighting">
+                        <span class="icon">🥊</span>
+                        <div class="text"><span class="label">Fighting</span></div>
+                    </li>
+                    <li class="type-poison" data-value="poison">
+                        <span class="icon">☠️</span>
+                        <div class="text"><span class="label">Poison</span></div>
+                    </li>
+                    <li class="type-ground" data-value="ground">
+                        <span class="icon">🌍</span>
+                        <div class="text"><span class="label">Ground</span></div>
+                    </li>
+                    <li class="type-flying" data-value="flying">
+                        <span class="icon">🌪️</span>
+                        <div class="text"><span class="label">Flying</span></div>
+                    </li>
+                    <li class="type-psychic" data-value="psychic">
+                        <span class="icon">🔮</span>
+                        <div class="text"><span class="label">Psychic</span></div>
+                    </li>
+                    <li class="type-bug" data-value="bug">
+                        <span class="icon">🐛</span>
+                        <div class="text"><span class="label">Bug</span></div>
+                    </li>
+                    <li class="type-rock" data-value="rock">
+                        <span class="icon">🪨</span>
+                        <div class="text"><span class="label">Rock</span></div>
+                    </li>
+                    <li class="type-ghost" data-value="ghost">
+                        <span class="icon">👻</span>
+                        <div class="text"><span class="label">Ghost</span></div>
+                    </li>
+                    <li class="type-dragon" data-value="dragon">
+                        <span class="icon">🐉</span>
+                        <div class="text"><span class="label">Dragon</span></div>
+                    </li>
+                    <li class="type-dark" data-value="dark">
+                        <span class="icon">🌑</span>
+                        <div class="text"><span class="label">Dark</span></div>
+                    </li>
+                    <li class="type-steel" data-value="steel">
+                        <span class="icon">⚙️</span>
+                        <div class="text"><span class="label">Steel</span></div>
+                    </li>
+                    <li class="type-fairy" data-value="fairy">
+                        <span class="icon">✨</span>
+                        <div class="text"><span class="label">Fairy</span></div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Result display -->
+            <div class="results" id="results">
+                <!-- Results will appear here -->
+            </div>
+        </main>
+
+        <!-- JS -->
+        <script src="app.js"></script>
+    </body>
+</html>

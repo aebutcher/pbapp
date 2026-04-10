@@ -1,0 +1,12 @@
+ICONS:
+- add vars for icons in app.js
+- use these vars where type icons appear
+
+DROPDOWN:
+- Must be centered, bold text to match results
+
+RESULTS
+- Headings could maybe use some style
+
+LATER:
+- Dark mode! Type colour applies to text instead, with black bgs
