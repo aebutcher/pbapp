@@ -215,10 +215,12 @@ function selectItem(item) {
   displayResults(item.dataset.value);
 }
 
-function displayResults(type) {
-  document.getElementById("results").replaceChildren();
-  var results = groupByEffectiveness(type);
+//Script for results
+const resultsBox = document.getElementById("results");
 
+function displayResults(type) {
+  resultsBox.replaceChildren();
+  var results = groupByEffectiveness(type);
   printTypes("Super effective!", results["2"]);
   printTypes("Not very effective...", results["0.5"]);
   printTypes("Does not affect!", results["0"]);
@@ -239,7 +241,7 @@ function groupByEffectiveness(type) {
 function printTypes(heading, types) {
   if (!types || types.length === 0) return;
   
-  var resultsBox = document.getElementById("results");
+  
 
   //Print the heading
   const efHeading = document.createElement("h3");

@@ -4,7 +4,10 @@ const urlsToCache = [
   "/",
   "/index.html",
   "/style.css",
-  "/app.js"
+  "/app.js",
+  "/fonts/jetbrains-mono-v24-latin-regular.woff2",
+  "/fonts/jetbrains-mono-v24-latin-500.woff2",
+  "/fonts/jetbrains-mono-v24-latin-700.woff2"
 ];
 
 // Install: cache essential files
