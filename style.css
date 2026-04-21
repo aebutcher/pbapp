@@ -1,26 +1,26 @@
 /* jetbrains-mono-regular - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url('./fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 400;
+    src: url("./fonts/jetbrains-mono-v24-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* jetbrains-mono-500 - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  src: url('./fonts/jetbrains-mono-v24-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 500;
+    src: url("./fonts/jetbrains-mono-v24-latin-500.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* jetbrains-mono-700 - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  src: url('./fonts/jetbrains-mono-v24-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 700;
+    src: url("./fonts/jetbrains-mono-v24-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* Make body fill the screen and use a clean font */
@@ -60,7 +60,7 @@ select {
     border: 1px solid #ccc;
     width: 100%;
     box-sizing: border-box;
-    font-family:  'JetBrains Mono', sans-serif;
+    font-family: "JetBrains Mono", sans-serif;
 }
 
 .results {
@@ -113,7 +113,7 @@ select {
     padding: 0;
     margin: 5px 0 0;
     border: 1px solid #ccc;
-    max-height: 200px;
+    max-height: 70dvh;
     overflow-y: auto;
     display: none;
     background: white;
@@ -171,6 +171,10 @@ select {
 }
 
 /* STYLE FOR RESULTS */
+.lineBox {
+    width: 100%;
+}
+
 .typeLine {
     display: flex;
     align-items: center;
@@ -184,22 +188,104 @@ select {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+#footMenu {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    background: #ff0000;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 0.5rem;
+    color: white;
+    border: solid 2px white;
+    border-radius: 999px;
+}
+
+.modeSel {
+    flex: 1;
+    padding: 0.5rem;
+    color: red;
+    background-color: white;
+    border-radius: 999px;
+}
+
 /* TYPE COLOURS */
-.type-normal   { background: #a8a77a; color: white; }
-.type-fire     { background: #ee8130; color: white; }
-.type-water    { background: #6390f0; color: white; }
-.type-electric { background: #f7d02c; color: #484848; } /* already dark */
-.type-grass    { background: #7ac74c; color: white; }
-.type-ice      { background: #96d9d6; color: #484848; } /* already dark */
-.type-fighting { background: #c22e28; color: white; }
-.type-poison   { background: #a33ea1; color: white; }
-.type-ground   { background: #e2bf65; color: #484848; } /* already dark */
-.type-flying   { background: #a98ff3; color: white; }
-.type-psychic  { background: #f95587; color: white; }
-.type-bug      { background: #a6b91a; color: white; }
-.type-rock     { background: #b6a136; color: white; }
-.type-ghost    { background: #735797; color: white; }
-.type-dragon   { background: #6f35fc; color: white; }
-.type-dark     { background: #705746; color: white; }
-.type-steel    { background: #b7b7ce; color: #484848; } /* already dark */
-.type-fairy    { background: #d685ad; color: white; }
+.type-normal {
+    background: #a8a77a;
+    color: white;
+}
+.type-fire {
+    background: #ee8130;
+    color: white;
+}
+.type-water {
+    background: #6390f0;
+    color: white;
+}
+.type-electric {
+    background: #f7d02c;
+    color: #484848;
+} /* already dark */
+.type-grass {
+    background: #7ac74c;
+    color: white;
+}
+.type-ice {
+    background: #96d9d6;
+    color: #484848;
+} /* already dark */
+.type-fighting {
+    background: #c22e28;
+    color: white;
+}
+.type-poison {
+    background: #a33ea1;
+    color: white;
+}
+.type-ground {
+    background: #e2bf65;
+    color: #484848;
+} /* already dark */
+.type-flying {
+    background: #a98ff3;
+    color: white;
+}
+.type-psychic {
+    background: #f95587;
+    color: white;
+}
+.type-bug {
+    background: #a6b91a;
+    color: white;
+}
+.type-rock {
+    background: #b6a136;
+    color: white;
+}
+.type-ghost {
+    background: #735797;
+    color: white;
+}
+.type-dragon {
+    background: #6f35fc;
+    color: white;
+}
+.type-dark {
+    background: #705746;
+    color: white;
+}
+.type-steel {
+    background: #b7b7ce;
+    color: #484848;
+} /* already dark */
+.type-fairy {
+    background: #d685ad;
+    color: white;
+}

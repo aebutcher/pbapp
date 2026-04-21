@@ -1,3 +1,4 @@
+//key = enemy . value = attack vs enemy
 const typeChart = {
   normal: {
     normal: 1, fire: 1, water: 1, electric: 1, grass: 1, ice: 1,
@@ -129,73 +130,41 @@ const typeIcons = {
   fairy: "🧚",
 };
 
-//Add icons to dropdown
+let selectedItem = null;
+
+// Add icons to dropdown
 document.querySelectorAll("li[data-value]").forEach(li => {
-  const type = li.dataset.value.toLowerCase(); // get data-value
-  const iconSpan = li.querySelector(".icon"); // the child <span> where icon goes
+  const type = li.dataset.value.toLowerCase();
+  const iconSpan = li.querySelector(".icon");
 
   if (typeIcons[type] && iconSpan) {
-    iconSpan.textContent = typeIcons[type]; // insert the icon
+    iconSpan.textContent = typeIcons[type];
   }
 });
 
-// Script for dropdown
 const input = document.getElementById("typeInput");
 const list = document.getElementById("dropdownList");
 const items = list.querySelectorAll("li");
 const wrapper = document.getElementById("typeInputWrapper");
 const selectedIcon = document.getElementById("selectedIcon");
+const dropdown = document.querySelector(".dropdown");
 
-// Show dropdown and select all text when input is focused
-input.addEventListener("focus", () => {
-  list.style.display = "block";
-
-  // Delay selection so it isn't cleared by mouseup
-  setTimeout(() => {
-    input.select();
-  }, 0);
+// Toggle dropdown on tap
+input.addEventListener("click", () => {
+  list.style.display = list.style.display === "block" ? "none" : "block";
 });
 
-// Filter items on input (without changing input.value)
-input.addEventListener("input", () => {
-  const typedValue = input.value.toLowerCase();
-  let firstMatch = null;
-
-  items.forEach((item) => {
-    const text = item.querySelector(".label").innerText.toLowerCase();
-    const isMatch = text.startsWith(typedValue);
-    item.classList.toggle("hidden", !isMatch);
-
-    if (!firstMatch && isMatch) firstMatch = item;
-    item.classList.remove("highlight");
-  });
-
-  // Highlight first visible match (for visual feedback only)
-  if (firstMatch) firstMatch.classList.add("highlight");
-});
-
-// Select highlighted item on Enter or Tab
-input.addEventListener("keydown", (e) => {
-  const highlighted = list.querySelector(".highlight");
-
-  if ((e.key === "Enter" || e.key === "Tab") && highlighted) {
-    e.preventDefault();
-    selectItem(highlighted);
-  }
-});
-
-// Select item on click
+// Select item on tap
 items.forEach((item) => {
   item.addEventListener("click", () => selectItem(item));
 });
 
-// Helper function to handle selection
 function selectItem(item) {
   const label = item.querySelector(".label").innerText;
   const icon = item.querySelector(".icon").innerText;
-  const typeClass = [...item.classList].find((c) => c.startsWith("type-"));
+  const typeClass = [...item.classList].find(c => c.startsWith("type-"));
 
-  // Update input and icon
+  // Update input text and icon
   input.value = label;
   selectedIcon.textContent = icon;
 
@@ -203,22 +172,68 @@ function selectItem(item) {
   wrapper.className = "input-wrapper";
   if (typeClass) wrapper.classList.add(typeClass);
 
-  // Highlight selected item
-  items.forEach((i) => i.classList.remove("selected", "highlight"));
+  // Mark selected item
+  items.forEach(i => i.classList.remove("selected"));
   item.classList.add("selected");
 
   // Hide dropdown
   list.style.display = "none";
 
-  console.log("Selected:", item.dataset.value);
+  selectedType = item.dataset.value;
+  updateResults();
+}
 
-  displayResults(item.dataset.value);
+// Close when tapping outside
+document.addEventListener("click", (e) => {
+  if (!dropdown.contains(e.target)) {
+    list.style.display = "none";
+  }
+});
+
+//Handling modes
+let appMode = "attack";
+
+function setMode(mode) {
+    appMode = mode;
+    updateModeButtons();
+    updateLabels();
+    updateResults();
+}
+
+function updateModeButtons() {
+    document.querySelectorAll(".mode-btn").forEach(btn => {
+        btn.classList.remove("modeSel");
+    });
+
+    document
+        .querySelector(`[data-mode="${appMode}"]`)
+        .classList.add("modeSel");
+}
+
+function updateLabels() {
+    let inputLabel = document.getElementById("topDescr");
+    let resultsLabel = document.getElementById("bottomDescr");
+    if (appMode === "attack") {
+        inputLabel.textContent = "OPPONENT:";
+        resultsLabel.textContent = "ATTACK:";
+    } else if (appMode === "defense") {
+        inputLabel.textContent = "ATTACKER:";
+        resultsLabel.textContent = "DEFENSE:";
+    }
 }
 
 //Script for results
 const resultsBox = document.getElementById("results");
 
-function displayResults(type) {
+function updateResults() {
+    if (appMode === "attack") {
+        showAttackResults(selectedType);
+    } else if (appMode === "defense") {
+        showDefenseResults(selectedType);
+    }
+}
+
+function showAttackResults(type) {
   resultsBox.replaceChildren();
   var results = groupByEffectiveness(type);
   printTypes("Super effective!", results["2"]);
@@ -226,27 +241,50 @@ function displayResults(type) {
   printTypes("Does not affect!", results["0"]);
 }
 
+function showDefenseResults(type) {
+  resultsBox.replaceChildren();
+  var results = groupByResistance(type);
+  printTypes("Super resistant!", results["0"]);
+  printTypes("Resistant!", results["0.5"]);
+  printTypes("Super vulnerable!", results["2"]);
+}
+
 function groupByEffectiveness(type) {
   const result = {};
-
   for (const [key, value] of Object.entries(typeChart[type])) {
     if (!result[value]) result[value] = [];
     result[value].push(key);
   }
-
   console.log(result);
+  return result;
+}
+
+function groupByResistance(type) {
+  const result = {
+    0: [],
+    0.5: [],
+    1: [],
+    2: []
+  };
+
+  for (const [attackType, matchups] of Object.entries(typeChart)) {
+    const multiplier = matchups[type];
+    result[multiplier].push(attackType);
+  }
+
   return result;
 }
 
 function printTypes(heading, types) {
   if (!types || types.length === 0) return;
   
-  
-
   //Print the heading
   const efHeading = document.createElement("h3");
   efHeading.textContent = `${heading}`;
   resultsBox.appendChild(efHeading);
+  //Container for result types
+  const lineBox = document.createElement("div");
+  lineBox.classList.add("lineBox");
 
   //Print the type icons and names
   types.forEach((typeName) => {
@@ -263,8 +301,9 @@ function printTypes(heading, types) {
     nameDiv.appendChild(nameSpan);
     tLine.appendChild(iconSpan);
     tLine.appendChild(nameDiv);
-    resultsBox.appendChild(tLine);
+    lineBox.appendChild(tLine);
   });
+  resultsBox.appendChild(lineBox);
 }
 
 // Hide dropdown when clicking outside

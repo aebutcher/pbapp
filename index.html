@@ -17,11 +17,11 @@
         <header>Pokémon Type App</header>
 
         <main>
-            <p class="description">OPPONENT:</p>
+            <p id="topDescr" class="description">OPPONENT:</p>
             <div class="dropdown">
                 <div class="input-wrapper" id="typeInputWrapper">
                     <span class="input-icon" id="selectedIcon">⚪</span>
-                <input type="text" id="typeInput" placeholder="Enter Pokémon type" />
+                <input type="text" id="typeInput" placeholder="Enter Pokémon type" readonly />
                 </div>
                 <ul id="dropdownList">
                     <li class="type-normal" data-value="normal">
@@ -99,14 +99,21 @@
                 </ul>
             </div>
             
-            <p class="description">ATTACK:</p>
+            <p id="bottomDescr" class="description">ATTACK:</p>
             
             <!-- Result display -->
             <div class="results" id="results">
                 <!-- Results will appear here -->
             </div>
+            
+            
         </main>
-
+        <!-- Footer Menu (Modes) -->
+        <div id="footMenu">
+            <div class="mode-btn modeSel" data-mode="attack" onclick="setMode('attack')">Attack</div>
+            <div class="mode-btn" data-mode="defense" onclick="setMode('defense')">Defense</div>
+        </div>
+        
         <!-- JS -->
         <script src="app.js"></script>
     </body>
